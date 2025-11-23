@@ -190,7 +190,7 @@
         return;
       }
 
-      status.textContent = `Có ${data.count} đơn`;
+      status.textContent = `Có ${data.count - 1} đơn`;
 
       const rows = (data.orders || []).map(o => `
         <tr>
