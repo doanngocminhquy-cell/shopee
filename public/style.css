@@ -261,4 +261,44 @@ textarea, button, #status, #result{
   line-height: 1.5;
 }
 
->>>>>>> bdf778f695d31887785658a5b587731200ab754a
+/* ===== FIX NÚT ZALO LỆCH ===== */
+
+/* Hàng chứa 2 nút */
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;        /* 👈 hạ cả 2 nút xuống đều */
+}
+
+/* Nút Zalo */
+.btn-zalo {
+  padding: 12px 22px;
+  background: #0084ff;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 132, 255, 0.25);
+  display: inline-flex;
+  align-items: center;     /* 👈 đảm bảo text căn giữa theo chiều dọc */
+  height: 46px;            /* 👈 CHIỀU CAO bằng với nút Check */
+}
+
+/* Nút Check */
+.btn-check {
+  padding: 12px 26px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  background: #ff5722;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  height: 46px;            /* 👈 CHIỀU CAO giống nút Zalo */
+  display: inline-flex;
+  align-items: center;     /* 👈 text luôn ở giữa */
+}
+
