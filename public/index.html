@@ -5,17 +5,7 @@
   <title>Tra cứu đơn Shopee – Minh Quý</title>
   <link rel="stylesheet" href="style.css">
 
-
-  <!-- FLOATING ACTION BUTTONS -->
-<div class="floating-buttons">
-  
-  
-</div>
-
   <style>
-      
-
-    
     body {
       background: #f4f6fb;
       font-family: "Segoe UI", sans-serif;
@@ -32,7 +22,6 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
 
-    /* Logo */
     .logo-img {
       width: 110px;
       display: block;
@@ -74,9 +63,7 @@
       transition: 0.2s;
     }
 
-    button:hover {
-      background: #ff6a39;
-    }
+    button:hover { background: #ff6a39; }
 
     #status {
       margin-top: 20px;
@@ -94,9 +81,7 @@
       overflow: hidden;
     }
 
-    thead {
-      background: #eef1f8;
-    }
+    thead { background: #eef1f8; }
 
     th, td {
       padding: 12px;
@@ -105,13 +90,7 @@
       text-align: left;
     }
 
-    th {
-      font-weight: 700;
-    }
-
-    tr:hover {
-      background: #fafafa;
-    }
+    tr:hover { background: #fafafa; }
 
     img.productImg {
       width: 46px;
@@ -120,6 +99,12 @@
       border-radius: 8px;
       border: 1px solid #ddd;
     }
+
+    .donate-text, .donate-bank {
+      text-align: center;
+      font-size: 16px;
+      margin: 5px 0;
+    }
   </style>
 </head>
 
@@ -127,25 +112,22 @@
 
   <div id="container">
 
-    <!-- LOGO -->
     <img src="./logo.png" class="logo-img" alt="logo">
 
-    <!-- KÊU GỌI ỦNG HỘ -->
+    <!-- ⭐ RESTORED: DÒNG ỦNG HỘ MIỀN TRUNG -->
     <p class="donate-text">
       ❤️ Chung tay ủng hộ đồng bào vùng lũ miền Trung ❤️
     </p>
 
     <p class="donate-bank">
       <b>Số tài khoản:</b> 8888881010 – <b>VCB</b><br>
-     Mặt Trận Tổ Quốc Việt Nam – Ban Cứu Trợ Trung Ương
-
+      Mặt Trận Tổ Quốc Việt Nam – Ban Cứu Trợ Trung Ương
     </p>
 
     <h2>Tra cứu đơn hàng Shopee – Minh Quý</h2>
 
     <textarea id="cookieBox" rows="6" placeholder="Dán cookie SPC_ST=... vào đây"></textarea>
 
-    <!-- HÀNG NÚT (Zalo trái – Check phải) -->
     <div class="btn-row">
       <a href="https://zalo.me/g/rsasqo212" class="btn-zalo">Nhóm ZALO Đặt Đơn</a>
       <button onclick="go()" class="btn-check">Check</button>
@@ -154,76 +136,75 @@
     <div id="status"></div>
     <div id="result"></div>
   </div>
-</body>
 
+<script>
+async function go() {
+  const cookies = document.getElementById("cookieBox").value
+    .split(/\r?\n/)
+    .map(s => s.trim())
+    .filter(Boolean);
 
-  <script>
-    async function go() {
-      const cookies = document.getElementById("cookieBox").value
-        .split(/\r?\n/)
-        .map(s => s.trim())
-        .filter(Boolean);
+  const status = document.getElementById("status");
+  const result = document.getElementById("result");
 
-      const status = document.getElementById("status");
-      const result = document.getElementById("result");
+  status.textContent = "Đang lấy đơn...";
+  result.innerHTML = "";
 
-      status.textContent = "Đang lấy đơn...";
-      result.innerHTML = "";
+  const res = await fetch("/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cookies })
+  });
 
-      // ✅ ĐỔI THÀNH RELATIVE PATH để chạy public
-      const res = await fetch("/orders", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ cookies })
-});
-      let data;
-      try {
-        data = await res.json();
-      } catch (e) {
-        status.textContent = "Lỗi: Server không trả JSON.";
-        return;
-      }
+  let data;
+  try {
+    data = await res.json();
+  } catch (e) {
+    status.textContent = "Lỗi: Server không trả JSON.";
+    return;
+  }
 
-      if (!res.ok) {
-        status.textContent = "Lỗi: " + (data.error || "unknown");
-        return;
-      }
+  if (!res.ok) {
+    status.textContent = "Lỗi: " + (data.error || "unknown");
+    return;
+  }
 
-      status.textContent = `Có ${data.count - 1} đơn`;
+  status.textContent = `Có ${data.count} đơn`;
 
-      const rows = (data.orders || []).map(o => `
+  const rows = (data.orders || []).map(o => `
+    <tr>
+      <td>${o.stt}</td>
+      <td>${o.mvd}</td>
+      <td>${o.status}</td>
+      <td>${o.receiver}</td>
+      <td>${o.receiverPhone}</td>
+      <td>${o.address}</td>
+      <td>${o.productImg ? `<img src="${o.productImg}" class="productImg"/>` : "—"}</td>
+      <td>${o.shipperName || "—"}</td>
+      <td>${o.shipperPhone || "—"}</td>
+    </tr>
+  `).join("");
+
+  result.innerHTML = `
+    <table>
+      <thead>
         <tr>
-          <td>${o.stt}</td>
-          <td>${o.mvd}</td>
-          <td>${o.status}</td>
-          <td>${o.receiver}</td>
-          <td>${o.receiverPhone}</td>
-          <td title="${o.address}">${o.address}</td>
-          <td>${o.productImg ? `<img src="${o.productImg}" class="productImg"/>` : "—"}</td>
-          <td>${o.shipperName || "—"}</td>
-          <td>${o.shipperPhone || "—"}</td>
+          <th>STT</th>
+          <th>MVĐ</th>
+          <th>Trạng thái</th>
+          <th>Người nhận</th>
+          <th>SĐT nhận</th>
+          <th>Địa chỉ</th>
+          <th>SP</th>
+          <th>Tên shipper</th>
+          <th>SĐT ship</th>
         </tr>
-      `).join("");
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+</script>
 
-      result.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>MVĐ</th>
-              <th>Trạng thái</th>
-              <th>Người nhận</th>
-              <th>SĐT nhận</th>
-              <th>Địa chỉ</th>
-              <th>SP</th>
-              <th>Tên shipper</th>
-              <th>SĐT ship</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      `;
-    }
-  </script>
 </body>
 </html>
