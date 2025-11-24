@@ -7,32 +7,26 @@
 
   <style>
     body {
-
-      <script>
-function createSnow() {
-  const snow = document.createElement("div");
-  snow.classList.add("snow");
-  snow.style.left = Math.random() * window.innerWidth + "px";
-  snow.style.animationDuration = 3 + Math.random() * 5 + "s";
-  snow.style.opacity = Math.random();
-  snow.style.fontSize = Math.random() * 8 + 8 + "px";
-  snow.innerHTML = "❄";
-  document.body.appendChild(snow);
-
-  setTimeout(() => {
-    snow.remove();
-  }, 8000);
-}
-
-setInterval(createSnow, 150);
-</script>
-
-
-      
       background: #f4f6fb;
       font-family: "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
+    }
+
+    /* ❄ CSS Tuyết rơi */
+    .snow {
+      position: fixed;
+      top: -10px;
+      color: white;
+      z-index: 9999;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
     }
 
     #container {
@@ -158,6 +152,28 @@ setInterval(createSnow, 150);
     <div id="result"></div>
   </div>
 
+
+<!-- ❄ SCRIPT TUYẾT RƠI: ĐÚNG VỊ TRÍ -->
+<script>
+function createSnow() {
+  const snow = document.createElement("div");
+  snow.classList.add("snow");
+  snow.style.left = Math.random() * window.innerWidth + "px";
+  snow.style.animationDuration = 3 + Math.random() * 5 + "s";
+  snow.style.opacity = Math.random();
+  snow.style.fontSize = Math.random() * 8 + 8 + "px";
+  snow.innerHTML = "❄";
+
+  document.body.appendChild(snow);
+
+  setTimeout(() => snow.remove(), 8000);
+}
+
+setInterval(createSnow, 150);
+</script>
+
+
+<!-- SCRIPT API -->
 <script>
 async function go() {
   const cookies = document.getElementById("cookieBox").value
@@ -171,7 +187,6 @@ async function go() {
   status.textContent = "Đang lấy đơn...";
   result.innerHTML = "";
 
-  // 🔥 ĐÃ SỬA ĐÚNG LINK BACKEND RENDER
   const API_URL = "https://shopee-srjr.onrender.com/api/orders";
 
   const res = await fetch(API_URL, {
