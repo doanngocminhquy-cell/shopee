@@ -302,3 +302,23 @@ textarea, button, #status, #result{
   align-items: center;     /* 👈 text luôn ở giữa */
 }
 
+.snow {
+  position: fixed;
+  top: -10px;
+  color: white;
+  z-index: 9999;
+  pointer-events: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+
