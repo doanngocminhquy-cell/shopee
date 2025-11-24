@@ -76,7 +76,7 @@ app.post("/api/orders", async (req, res) => {
       detail: e?.response?.data || e.message,
     });
   }
-});
+}); 
 
 app.listen(3000, () =>
   console.log("Server A chạy tại: http://localhost:3000")
