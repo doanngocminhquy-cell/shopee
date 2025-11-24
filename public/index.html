@@ -114,7 +114,6 @@
 
     <img src="./logo.png" class="logo-img" alt="logo">
 
-    <!-- ⭐ RESTORED: DÒNG ỦNG HỘ MIỀN TRUNG -->
     <p class="donate-text">
       ❤️ Chung tay ủng hộ đồng bào vùng lũ miền Trung ❤️
     </p>
@@ -150,7 +149,10 @@ async function go() {
   status.textContent = "Đang lấy đơn...";
   result.innerHTML = "";
 
-  const res = await fetch("/api/orders", {
+  // 🔥 ĐÃ SỬA ĐÚNG LINK BACKEND RENDER
+  const API_URL = "https://shopee-srjr.onrender.com/api/orders";
+
+  const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ cookies })
