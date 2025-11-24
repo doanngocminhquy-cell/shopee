@@ -1,160 +1,197 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Tra cứu đơn Shopee – Minh Quý</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<title>Tra cứu đơn Shopee – Minh Quý 🎄</title>
 
-  <style>
-    body {
-      background: #f4f6fb;
-      font-family: "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+  body {
+    background: linear-gradient(#ffefef, #ffffff);
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
 
-    /* ❄ CSS Tuyết rơi */
-    .snow {
-      position: fixed;
-      top: -10px;
-      color: white;
-      z-index: 9999;
-      pointer-events: none;
-      animation-name: fall;
-      animation-timing-function: linear;
-    }
+  /* Đèn Noel viền */
+  .lights {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background: #c40000;
+  }
 
-    @keyframes fall {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100vh); }
-    }
+  .lights span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: 0 8px;
+    animation: blink 1.2s infinite alternate;
+  }
 
-    #container {
-      max-width: 1050px;
-      margin: 40px auto;
-      background: #ffffff;
-      padding: 30px 40px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    }
+  /* Màu đèn nhấp nháy */
+  .lights span:nth-child(1) { background: #ff0000; animation-delay: 0.1s; }
+  .lights span:nth-child(2) { background: #00ff00; animation-delay: 0.3s; }
+  .lights span:nth-child(3) { background: #00aaff; animation-delay: 0.5s; }
+  .lights span:nth-child(4) { background: #ffff00; animation-delay: 0.7s; }
+  .lights span:nth-child(5) { background: #ff00ff; animation-delay: 0.9s; }
+  @keyframes blink {
+    from { opacity: 0.4; }
+    to { opacity: 1; transform: scale(1.2); }
+  }
 
-    .logo-img {
-      width: 110px;
-      display: block;
-      margin: 0 auto 15px;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-    }
+  /* Khung web */
+  #container {
+    max-width: 1050px;
+    margin: 40px auto;
+    background: #ffffffd8;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    backdrop-filter: blur(5px);
+  }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 15px;
-      font-size: 28px;
-      font-weight: 700;
-      color: #333;
-    }
+  /* Logo */
+  .logo-img {
+    width: 110px;
+    display: block;
+    margin: 0 auto 15px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
 
-    textarea {
-      width: 100%;
-      padding: 12px;
-      font-size: 15px;
-      border-radius: 10px;
-      border: 1px solid #d0d7e2;
-      outline: none;
-      resize: vertical;
-    }
+  /* Tiêu đề */
+  h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #b30000;
+    text-shadow: 1px 1px 2px white;
+  }
 
-    button {
-      margin-top: 12px;
-      padding: 10px 26px;
-      font-size: 16px;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
-      background: #ff5722;
-      color: white;
-      cursor: pointer;
-      display: block;
-      margin-left: auto;
-      transition: 0.2s;
-    }
+  /* Form cookie */
+  textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #d0d7e2;
+    outline: none;
+    resize: vertical;
+  }
 
-    button:hover { background: #ff6a39; }
+  button {
+    margin-top: 12px;
+    padding: 10px 26px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background: #ff3c00;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    transition: 0.2s;
+  }
+  button:hover { background: #ff5b2a; }
 
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 17px;
-      text-align: center;
-    }
+  #status {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 17px;
+    text-align: center;
+    color: #006600;
+  }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 25px;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-    }
+  /* Bảng đơn hàng */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+  }
 
-    thead { background: #eef1f8; }
+  thead { background: #ffe5e5; }
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid #e6e8ef;
+    font-size: 14px;
+    text-align: left;
+  }
+  tr:hover { background: #fdf5f5; }
 
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #e6e8ef;
-      font-size: 14px;
-      text-align: left;
-    }
+  img.productImg {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
 
-    tr:hover { background: #fafafa; }
+  /* ❄ Tuyết rơi */
+  .snow {
+    position: fixed;
+    top: -10px;
+    color: white;
+    z-index: 9999;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+  }
 
-    img.productImg {
-      width: 46px;
-      height: 46px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
+  /* Nút bật tắt tuyết */
+  #toggleSnow {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff0000;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+</style>
 
-    .donate-text, .donate-bank {
-      text-align: center;
-      font-size: 16px;
-      margin: 5px 0;
-    }
-  </style>
 </head>
-
 <body>
 
-  <div id="container">
+<!-- Dải đèn Noel -->
+<div class="lights">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
 
-    <img src="./logo.png" class="logo-img" alt="logo">
+<div id="container">
 
-    <p class="donate-text">
-      ❤️ Chung tay ủng hộ đồng bào vùng lũ miền Trung ❤️
-    </p>
+  <img src="./logo.png" class="logo-img" alt="logo">
 
-    <p class="donate-bank">
-      <b>Số tài khoản:</b> 8888881010 – <b>VCB</b><br>
-      Mặt Trận Tổ Quốc Việt Nam – Ban Cứu Trợ Trung Ương
-    </p>
+  <h2>🎅 Tra cứu đơn hàng Shopee – Minh Quý 🎁</h2>
 
-    <h2>Tra cứu đơn hàng Shopee – Minh Quý</h2>
+  <textarea id="cookieBox" rows="6" placeholder="Dán cookie SPC_ST=... vào đây"></textarea>
 
-    <textarea id="cookieBox" rows="6" placeholder="Dán cookie SPC_ST=... vào đây"></textarea>
+  <button onclick="go()" class="btn-check">Check</button>
 
-    <div class="btn-row">
-      <a href="https://zalo.me/g/rsasqo212" class="btn-zalo">Nhóm ZALO Đặt Đơn</a>
-      <button onclick="go()" class="btn-check">Check</button>
-    </div>
+  <div id="status"></div>
+  <div id="result"></div>
+</div>
 
-    <div id="status"></div>
-    <div id="result"></div>
-  </div>
+<!-- Nút bật/tắt tuyết -->
+<div id="toggleSnow" onclick="toggleSnow()">❄ Tắt tuyết</div>
 
-
-<!-- ❄ SCRIPT TUYẾT RƠI: ĐÚNG VỊ TRÍ -->
+<!-- TUYẾT RƠI -->
 <script>
+let snowing = true;
+let snowInterval;
+
 function createSnow() {
   const snow = document.createElement("div");
   snow.classList.add("snow");
@@ -163,17 +200,29 @@ function createSnow() {
   snow.style.opacity = Math.random();
   snow.style.fontSize = Math.random() * 8 + 8 + "px";
   snow.innerHTML = "❄";
-
   document.body.appendChild(snow);
-
-  setTimeout(() => snow.remove(), 8000);
+  setTimeout(() => snow.remove(), 7000);
 }
 
-setInterval(createSnow, 150);
+function startSnow() {
+  snowInterval = setInterval(createSnow, 120);
+}
+
+function toggleSnow() {
+  if (snowing) {
+    clearInterval(snowInterval);
+    document.getElementById("toggleSnow").innerHTML = "❄ Bật tuyết";
+  } else {
+    startSnow();
+    document.getElementById("toggleSnow").innerHTML = "❄ Tắt tuyết";
+  }
+  snowing = !snowing;
+}
+
+startSnow();
 </script>
 
-
-<!-- SCRIPT API -->
+<!-- API -->
 <script>
 async function go() {
   const cookies = document.getElementById("cookieBox").value
@@ -187,21 +236,15 @@ async function go() {
   status.textContent = "Đang lấy đơn...";
   result.innerHTML = "";
 
-  const API_URL = "https://shopee-srjr.onrender.com/api/orders";
-
-  const res = await fetch(API_URL, {
+  const res = await fetch("https://shopee-srjr.onrender.com/api/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ cookies })
   });
 
   let data;
-  try {
-    data = await res.json();
-  } catch (e) {
-    status.textContent = "Lỗi: Server không trả JSON.";
-    return;
-  }
+  try { data = await res.json(); }
+  catch { status.textContent = "Lỗi: Server không trả JSON."; return; }
 
   if (!res.ok) {
     status.textContent = "Lỗi: " + (data.error || "unknown");
@@ -210,7 +253,7 @@ async function go() {
 
   status.textContent = `Có ${data.count} đơn`;
 
-  const rows = (data.orders || []).map(o => `
+  const rows = data.orders.map(o => `
     <tr>
       <td>${o.stt}</td>
       <td>${o.mvd}</td>
