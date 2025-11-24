@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Worker URL đúng của bạn
 const WORKER_URL = "https://1.doanngocminhquy.workers.dev";
+
 function sanitize(s) {
   return String(s || "")
     .replace(/[\u200B-\u200D\uFEFF]/g, "")
@@ -76,8 +77,10 @@ app.post("/api/orders", async (req, res) => {
       detail: e?.response?.data || e.message,
     });
   }
-}); 
+});
 
-app.listen(3000, () =>
-  console.log("Server A chạy tại: http://localhost:3000")
-);
+// 🔥 DÒNG NÀY LÀ ĐÃ SỬA ĐỂ RUN TRÊN RENDER
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server A đang chạy trên PORT:", PORT);
+});
