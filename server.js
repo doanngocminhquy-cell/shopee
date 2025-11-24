@@ -15,8 +15,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "public")));
 
 // Worker URL đúng của bạn
-const WORKER_URL = "https://floral-shadow-f45c.doanngocminhquy.workers.dev";
-
+const WORKER_URL = "https://1.doanngocminhquy.workers.dev";
 function sanitize(s) {
   return String(s || "")
     .replace(/[\u200B-\u200D\uFEFF]/g, "")
