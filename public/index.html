@@ -1,6 +1,251 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <meta charset="UTF-8" />
+  <title>Trang Giáng Sinh</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* nền đỏ đậm kiểu Noel */
+      background: radial-gradient(circle at top, #ff7b7b 0, #c20000 40%, #540000 100%);
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      padding: 40px 24px 56px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 24px;
+      padding: 40px 24px 48px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+    }
+
+    .card h1 {
+      font-size: 40px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    /* CÂY THÔNG HAI BÊN */
+
+    .tree {
+      position: absolute;
+      bottom: 0;
+      width: 120px;
+      height: 180px;
+    }
+
+    .tree-left {
+      left: 0;
+    }
+
+    .tree-right {
+      right: 0;
+      transform: scaleX(-1); /* lật đối xứng */
+    }
+
+    .tree .triangle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 70px solid #0f7b3c;
+      filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.4));
+    }
+
+    .tree .triangle:nth-child(2) {
+      top: 35px;
+      border-left-width: 50px;
+      border-right-width: 50px;
+      border-bottom-width: 60px;
+    }
+
+    .tree .triangle:nth-child(3) {
+      top: 70px;
+      border-left-width: 40px;
+      border-right-width: 40px;
+      border-bottom-width: 50px;
+    }
+
+    .tree .trunk {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 40px;
+      background: #7b4b27;
+      border-radius: 6px;
+    }
+
+    /* HỘP QUÀ */
+
+    .gift {
+      position: absolute;
+      bottom: 10px;
+      width: 70px;
+      height: 60px;
+      background: #ffd54f;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .gift::before,
+    .gift::after {
+      content: "";
+      position: absolute;
+      background: #ff4081;
+    }
+
+    .gift::before {
+      width: 12px;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gift::after {
+      height: 12px;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .gift .bow {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 16px;
+      background: #ff4081;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .gift1 {
+      left: 95px;
+    }
+
+    .gift2 {
+      right: 95px;
+      background: #8ce3ff;
+    }
+
+    .gift2::before,
+    .gift2::after,
+    .gift2 .bow {
+      background: #1f8cff;
+    }
+
+    /* TUYẾT RƠI */
+
+    .snow {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Cây thông trái -->
+    <div class="tree tree-left">
+      <div class="triangle"></div>
+      <div class="triangle"></div>
+      <div class="triangle"></div>
+      <div class="trunk"></div>
+    </div>
+
+    <!-- Cây thông phải -->
+    <div class="tree tree-right">
+      <div class="triangle"></div>
+      <div class="triangle"></div>
+      <div class="triangle"></div>
+      <div class="trunk"></div>
+    </div>
+
+    <!-- Hộp quà -->
+    <div class="gift gift1">
+      <div class="bow"></div>
+    </div>
+    <div class="gift gift2">
+      <div class="bow"></div>
+    </div>
+
+    <!-- Chỗ này là nội dung web của bạn -->
+    <div class="card">
+      <h1>Chúc mừng Giáng Sinh 🎄</h1>
+      <p>Thay đoạn chữ này bằng form tra cứu đơn, nút bấm, v.v… của bạn.</p>
+    </div>
+  </div>
+
+  <script>
+    // Tuyết rơi
+    function createSnow() {
+      const snow = document.createElement("div");
+      snow.classList.add("snow");
+      snow.textContent = "❄";
+      snow.style.left = Math.random() * window.innerWidth + "px";
+
+      const size = 10 + Math.random() * 10;
+      snow.style.fontSize = size + "px";
+      snow.style.animationDuration = 4 + Math.random() * 6 + "s";
+      snow.style.opacity = 0.4 + Math.random() * 0.6;
+
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 11000);
+    }
+
+    setInterval(createSnow, 200);
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
   <meta charset="UTF-8">
   <title>Tra cứu đơn Shopee – Minh Quý</title>
   <link rel="stylesheet" href="style.css">
