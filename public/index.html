@@ -171,12 +171,11 @@
       result.innerHTML = "";
 
       // ✅ ĐỔI THÀNH RELATIVE PATH để chạy public
-      const res = await fetch("/orders"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cookies })
-      });
-
+      const res = await fetch("/orders", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ cookies })
+});
       let data;
       try {
         data = await res.json();
