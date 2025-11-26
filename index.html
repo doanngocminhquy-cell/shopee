@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Tra cứu đơn Shopee – Minh Quý</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- CSS chuẩn đường dẫn -->
+  <link rel="stylesheet" href="/style.css">
 
   <style>
-    /* Nền đêm Noel đỏ (tối để tuyết nổi rõ) */
+    /* Nền đêm Noel đỏ */
     body {
       margin: 0;
       padding: 0;
@@ -17,7 +19,6 @@
       overflow-x: hidden;
     }
 
-    /* Khung chính – vẫn như cũ nhưng viền đỏ + vàng Noel */
     #container {
       max-width: 1050px;
       margin: 50px auto 40px;
@@ -40,7 +41,6 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.4);
     }
 
-    /* Tiêu đề màu đỏ + hiệu ứng gradient Noel */
     h2 {
       text-align: center;
       margin-bottom: 15px;
@@ -140,10 +140,6 @@
       box-shadow: 0 0 15px rgba(15,23,42,0.9);
     }
 
-    thead {
-      background: #111827;
-    }
-
     th, td {
       padding: 12px;
       border-bottom: 1px solid #1f2937;
@@ -156,36 +152,6 @@
       background: #030712;
     }
 
-    img.productImg {
-      width: 46px;
-      height: 46px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid #4b5563;
-    }
-
-    /* ❄ Tuyết rơi – to & sáng trên nền đỏ */
-    .snow {
-      position: fixed;
-      top: -10px;
-      color: #ffffff;
-      z-index: 9999;
-      pointer-events: none;
-      animation-name: fall;
-      animation-timing-function: linear;
-      text-shadow: 0 0 12px rgba(255,255,255,1);
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(0) translateX(0);
-      }
-      100% {
-        transform: translateY(100vh) translateX(40px);
-      }
-    }
-
-    /* Dải đèn Noel phía trên container */
     .lights {
       width: 100%;
       max-width: 1050px;
@@ -204,17 +170,11 @@
       animation: blink 1.2s infinite alternate;
     }
 
-    .lights span:nth-child(2) { background:#f97316; box-shadow:0 0 10px rgba(249,115,22,0.9); animation-delay: .2s; }
-    .lights span:nth-child(3) { background:#22c55e; box-shadow:0 0 10px rgba(34,197,94,0.9); animation-delay: .4s; }
-    .lights span:nth-child(4) { background:#38bdf8; box-shadow:0 0 10px rgba(56,189,248,0.9); animation-delay: .6s; }
-    .lights span:nth-child(5) { background:#f97373; box-shadow:0 0 10px rgba(248,113,113,0.9); animation-delay: .8s; }
-
     @keyframes blink {
       from { opacity: 0.4; transform: translateY(0); }
       to   { opacity: 1; transform: translateY(2px) scale(1.1); }
     }
 
-    /* 🌲🌲 CÂY THÔNG 2 BÊN – TRANG TRÍ, KO ĐỔI BỐ CỤC */
     .xmas-tree {
       position: fixed;
       font-size: 70px;
@@ -222,14 +182,9 @@
       z-index: 100;
       text-shadow: 0 0 16px rgba(34,197,94,0.9);
     }
-    .xmas-tree.left {
-      left: 20px;
-    }
-    .xmas-tree.right {
-      right: 20px;
-    }
+    .xmas-tree.left { left: 20px; }
+    .xmas-tree.right { right: 20px; }
 
-    /* 🎁 HỘP QUÀ DƯỚI CHÂN TRANG TRÍ */
     .xmas-gifts {
       position: fixed;
       bottom: 10px;
@@ -241,28 +196,26 @@
     }
 
     @media (max-width: 900px) {
-      .xmas-tree { display:none; }  /* mobile cho gọn */
+      .xmas-tree { display:none; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Cây thông & hộp quà (trang trí) -->
   <div class="xmas-tree left">🎄</div>
   <div class="xmas-tree right">🎄</div>
   <div class="xmas-gifts">🎁🎁🎁</div>
 
-  <!-- Dải đèn Noel trên cùng -->
   <div class="lights">
     <span></span><span></span><span></span><span></span><span></span>
   </div>
 
   <div id="container">
 
-    <img src="./logo.png" class="logo-img" alt="logo">
+    <!-- Logo đúng đường dẫn -->
+    <img src="/logo.png" class="logo-img" alt="logo">
 
-    <!-- ❤️ ĐOẠN ỦNG HỘ ĐỒNG BÀO CỦA BẠN -->
     <p class="donate-text">
       ❤️ Chung tay ủng hộ đồng bào vùng lũ miền Trung ❤️
     </p>
@@ -276,7 +229,6 @@
 
     <textarea id="cookieBox" rows="6" placeholder="Dán cookie SPC_ST=... vào đây"></textarea>
 
-    <!-- ✅ NHÓM ZALO GIỮ NGUYÊN -->
     <div class="btn-row">
       <a href="https://zalo.me/g/rsasqo212" class="btn-zalo">Nhóm ZALO Đặt Đơn</a>
       <button onclick="go()" class="btn-check">Check</button>
@@ -286,7 +238,7 @@
     <div id="result"></div>
   </div>
 
-  <!-- ❄ SCRIPT TUYẾT RƠI – ĐẬM RÕ -->
+  <!-- Snow -->
   <script>
   function createSnow() {
     const snow = document.createElement("div");
@@ -294,16 +246,15 @@
     snow.style.left = Math.random() * window.innerWidth + "px";
     snow.style.animationDuration = 4 + Math.random() * 4 + "s";
     snow.style.opacity = 0.7 + Math.random() * 0.3;
-    snow.style.fontSize = 14 + Math.random() * 14 + "px"; // to hơn
-    snow.innerHTML = "❄";
+    snow.style.fontSize = 14 + Math.random() * 14 + "px";
+    snow.innerHTML = " Nguyencaclo ";
     document.body.appendChild(snow);
     setTimeout(() => snow.remove(), 9000);
   }
-  // dày hơn: khoảng cách nhỏ
   setInterval(createSnow, 120);
   </script>
 
-  <!-- SCRIPT GỌI API (GIỮ NGUYÊN) -->
+  <!-- API -->
   <script>
   async function go() {
     const cookies = document.getElementById("cookieBox").value
@@ -318,8 +269,6 @@
     result.innerHTML = "";
 
     const API_URL = "/api/orders";
-
-
 
     const res = await fetch(API_URL, {
       method: "POST",
